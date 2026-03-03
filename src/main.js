@@ -127,7 +127,7 @@ function updateProjectLinks(theme) {
             return;
         }
 
-        const url = new URL(href, window.location.origin);
+        const url = new URL(href, window.location.href);
         url.searchParams.set('theme', theme);
         link.setAttribute('href', `${url.pathname}${url.search}${url.hash}`);
     });
