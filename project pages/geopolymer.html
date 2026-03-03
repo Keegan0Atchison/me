@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta name="color-scheme" content="dark light" />
+	<title>Art, Me | Keegan Atchison</title>
+	<script>
+		(() => {
+			const params = new URLSearchParams(window.location.search);
+			const theme = params.get('theme') || localStorage.getItem('theme') || 'dark';
+			const root = document.documentElement;
+
+			if (theme === 'dark') {
+				root.style.setProperty('--bg-white', '#1a1a1a');
+				root.style.setProperty('--text-grey', '#cccccc');
+				root.style.backgroundColor = '#1a1a1a';
+				root.classList.add('dark-mode');
+			} else {
+				root.style.setProperty('--bg-white', '#ffffff');
+				root.style.setProperty('--text-grey', '#888888');
+				root.style.backgroundColor = '#ffffff';
+				root.classList.remove('dark-mode');
+			}
+		})();
+	</script>
+  <link rel="stylesheet" crossorigin href="/me/assets/style-CDCY6oMV.css">
+</head>
+
+<body class="mn-page">
+	<header class="global-header">
+		<h1>Keegan Atchison</h1>
+		<p class="subheader">Engineer + Designer</p>
+		<nav class="main-nav">
+			<div class="nav-links">
+				<a href="../index.html#home">Home</a>
+				<a href="../index.html#work">Work</a>
+				<a href="../index.html#about">Contact</a>
+			</div>
+		</nav>
+	</header>
+
+	<main>
+		<section class="page-section" aria-label="Art page content">
+			<aside class="bio-box">
+				<h3>Geopolymer Column, TU Eindhoven & WASP 3D</h3>
+				<div class="mn-image-row geo" aria-label="geopolymer column videos">
+					<img src="/me/assets/geo5-C8ZLmguW.png" alt="Microneedle project image MN3">
+					<video autoplay muted loop playsinline>
+						<source src="/me/assets/geo3-C5Ji_ebs.webm" type="video/webm">
+					</video>
+				</div>
+				<p>Geopolymer materials are inorganic polymers formed by activating aluminosilicate precursors (fly ash or metakaolin) with alkaline solutions to create a hardened, cement-like binder. Unlike traditional Portland cement, geopolymers rely on a three-dimensional network of Si–O–Al bonds rather than calcium silicate hydrates, resulting in high compressive strength, chemical resistance, and thermal stability. Geopolymers offer a sustainable alternative to cement (~9% of world CO2 emissions) and fired clay as they utilize industrial byproducts and require less energy to produce. Airports, houses, and ancient structures have been built with geopolymers, but further research and industry support are required to scale produciton and adoption of the material.</p>
+				<div class="geo-image-row" aria-label="Microneedle project images">
+					<img src="/me/assets/geo6-DBqLFaKJ.png" alt="Microneedle project image MN3">
+					<img src="/me/assets/geo7-DM2IWQOq.png" alt="Microneedle project image MN4">
+				</div>
+				<p>PROCESS</p>
+				<p>I collaborated with phD students and professors at the University of Bologna, the University of Padova, and TU Eindhoven to design geopolymer formulations. Collaborators supported my development of geopolymer formulations, ensuring structural performance and adherence to academic testing standards. After rigorous testing, I worked with WASP 3D and spoke with local material suppliers to buy raw materials and create economic + production scaling plans. I worked with WASP 3D team members to print 12-meter structural column for TU Eidenhoven.</p>
+				<h3>Geopolymers for Lunar Additive Manufacturing and Sensing (GLAMS), Italian Space Agency</h3>
+				<div class="geo-image-row" aria-label="Microneedle project images">
+					<img src="/me/assets/geo8-DTw4b9we.png" alt="Microneedle project image MN3">
+					<img src="/me/assets/geo9-K4QtYoC0.png" alt="Microneedle project image MN4">
+				</div>
+				<p>Funded by the Italian Space Agency (ASI), the two-year GLAMS Project develops 3D printing methods to fabricate structural components for lunar bases using geopolymer cement binders derived from lunar regolith. Through using lunar materials, the project aims to reduce launch mass, cost, and environmental impact associated with transporting construction resources from Earth to the Moon.</p>
+				<p>PROCESS</p>
+				<p>Following the geopolymer column project, I developed novel geopolymer formulations considering lunar dust composition and structural requirments. The project continued testing of large scale structural columns, ensuring that rhelogical, stress, and strain requirements were tested and documented.	</p>
+
+			</aside>
+		</section>
+	</main>
+
+
+
+	<script>
+		(() => {
+			const root = document.documentElement;
+			const params = new URLSearchParams(window.location.search);
+			const theme = params.get('theme') || localStorage.getItem('theme') || 'dark';
+
+			function applyTheme(selectedTheme) {
+				if (selectedTheme === 'dark') {
+					root.style.setProperty('--bg-white', '#1a1a1a');
+					root.style.setProperty('--text-grey', '#cccccc');
+					document.body.classList.add('dark-mode');
+					document.body.style.backgroundColor = '#1a1a1a';
+				} else {
+					root.style.setProperty('--bg-white', '#ffffff');
+					root.style.setProperty('--text-grey', '#888888');
+					document.body.classList.remove('dark-mode');
+					document.body.style.backgroundColor = '#ffffff';
+				}
+
+				localStorage.setItem('theme', selectedTheme);
+
+				document.querySelectorAll('nav a').forEach(link => {
+					const href = link.getAttribute('href');
+					if (!href) {
+						return;
+					}
+
+					const url = new URL(href, window.location.href);
+					url.searchParams.set('theme', selectedTheme);
+					link.setAttribute('href', `${url.pathname}${url.search}${url.hash}`);
+				});
+			}
+
+			applyTheme(theme);
+		})();
+	</script>
+</body>
+</html>
