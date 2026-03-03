@@ -18,7 +18,7 @@
 				root.classList.add('dark-mode');
 			} else {
 				root.style.setProperty('--bg-white', '#ffffff');
-				root.style.setProperty('--text-grey', '#888888');
+				root.style.setProperty('--text-grey', '#555555');
 				root.style.backgroundColor = '#ffffff';
 				root.classList.remove('dark-mode');
 			}
@@ -27,9 +27,8 @@
 	<link rel="stylesheet" href="/src/style.css">
 </head>
 <body class="mn-page">
-	<header class="global-header">
+	<header class="global-header left-identity">
 		<h1>Keegan Atchison</h1>
-		<p class="subheader">Engineer + Designer</p>
 		<nav class="main-nav">
 			<div class="nav-links">
 				<a href="../index.html#home">Home</a>
@@ -39,10 +38,10 @@
 		</nav>
 	</header>
 
-	<main>
+	<main class="right-content">
 		<section class="page-section" aria-label="Art page content">
 			<aside class="bio-box">
-				<h3>Art</h3>
+				<h2>Art</h2>
 				<div class="mn-image-row geo art-video-row" aria-label="Geopolymer column video 3D2">
 					<video autoplay muted loop playsinline>
 						<source src="../assets/3D2.webm" type="video/webm">
@@ -91,7 +90,7 @@
 					document.body.style.backgroundColor = '#1a1a1a';
 				} else {
 					root.style.setProperty('--bg-white', '#ffffff');
-					root.style.setProperty('--text-grey', '#888888');
+					root.style.setProperty('--text-grey', '#555555');
 					document.body.classList.remove('dark-mode');
 					document.body.style.backgroundColor = '#ffffff';
 				}

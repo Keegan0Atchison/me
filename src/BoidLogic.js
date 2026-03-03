@@ -3,13 +3,13 @@ export class BoidLogic {
     constructor(numBoids, width, height) {
         this.numBoids = numBoids;
         this.baseParams = {
-            visualRange: 80,
+            visualRange: 60,
             protectedRange: 18,
             centeringFactor: 0.0008,
             avoidFactor: 0.04,
             matchingFactor: 0.07,
-            maxSpeed: 6,
-            minSpeed: 2,
+            maxSpeed: 3.6,
+            minSpeed: 1.2,
             turnFactor: 0.2,
             margin: 300,
             maxbias: 0.01,

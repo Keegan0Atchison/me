@@ -18,7 +18,7 @@
 				root.classList.add('dark-mode');
 			} else {
 				root.style.setProperty('--bg-white', '#ffffff');
-				root.style.setProperty('--text-grey', '#888888');
+				root.style.setProperty('--text-grey', '#555555');
 				root.style.backgroundColor = '#ffffff';
 				root.classList.remove('dark-mode');
 			}
@@ -28,9 +28,8 @@
 </head>
 
 <body class="mn-page">
-	<header class="global-header">
+	<header class="global-header left-identity">
 		<h1>Keegan Atchison</h1>
-		<p class="subheader">Engineer + Designer</p>
 		<nav class="main-nav">
 			<div class="nav-links">
 				<a href="../index.html#home">Home</a>
@@ -40,10 +39,10 @@
 		</nav>
 	</header>
 
-	<main>
+	<main class="right-content">
 		<section class="page-section" aria-label="Art page content">
 			<aside class="bio-box">
-				<h3>Geopolymer Column, TU Eindhoven & WASP 3D</h3>
+				<h2>Geopolymer Column, TU Eindhoven & WASP 3D</h2>
 				<div class="mn-image-row geo" aria-label="geopolymer column videos">
 					<img src="../assets/geo5.png" alt="Microneedle project image MN3">
 					<video autoplay muted loop playsinline>
@@ -57,7 +56,7 @@
 				</div>
 				<p>PROCESS</p>
 				<p>I collaborated with phD students and professors at the University of Bologna, the University of Padova, and TU Eindhoven to design geopolymer formulations. Collaborators supported my development of geopolymer formulations, ensuring structural performance and adherence to academic testing standards. After rigorous testing, I worked with WASP 3D and spoke with local material suppliers to buy raw materials and create economic + production scaling plans. I worked with WASP 3D team members to print 12-meter structural column for TU Eidenhoven.</p>
-				<h3>Geopolymers for Lunar Additive Manufacturing and Sensing (GLAMS), Italian Space Agency</h3>
+				<h2>Geopolymers for Lunar Additive Manufacturing and Sensing (GLAMS), Italian Space Agency</h2>
 				<div class="geo-image-row" aria-label="Microneedle project images">
 					<img src="../assets/geo8.png" alt="Microneedle project image MN3">
 					<img src="../assets/geo9.png" alt="Microneedle project image MN4">
@@ -86,7 +85,7 @@
 					document.body.style.backgroundColor = '#1a1a1a';
 				} else {
 					root.style.setProperty('--bg-white', '#ffffff');
-					root.style.setProperty('--text-grey', '#888888');
+					root.style.setProperty('--text-grey', '#555555');
 					document.body.classList.remove('dark-mode');
 					document.body.style.backgroundColor = '#ffffff';
 				}

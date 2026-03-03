@@ -1,17 +1,34 @@
 :root {
     --bg-white: #ffffff;
-    --text-grey: #888888;
+    --text-grey: #555555;
 }
 
-* {
-    box-sizing: border-box;
+@font-face {
+    font-family: 'PP Neue Montreal';
+    src: url('../assets/fonts/PPNeueMontreal-Thin.woff2') format('woff2');
+    font-weight: 200;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'PP Neue Montreal';
+    src: url('../assets/fonts/PPNeueMontreal-Book.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'PP Neue Montreal';
+    src: url('../assets/fonts/PPNeueMontreal-SemiBold.woff2') format('woff2');
+    font-weight: 600;
+    font-style: normal;
 }
 
 *,
 *::before,
 *::after {
     box-sizing: border-box;
-    font-family: Helvetica, Arial, sans-serif;
+    font-family: 'PP Neue Montreal', Helvetica, Arial, sans-serif;
 }
 
 img,
@@ -23,10 +40,25 @@ video {
 body, html {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
     width: 100%;
     height: 100%;
     background: transparent;
     color: var(--text-grey);
+    line-height: 1.4;
+}
+
+p,
+.bio-box p,
+.contact-info p {
+    font-weight: 400;
+    line-height: 1.4;
+}
+
+figcaption,
+.image-description {
+    font-weight: 200;
+    line-height: 1.4;
 }
 
 /* Make the Three.js Canvas a background layer */
@@ -38,14 +70,20 @@ canvas {
     pointer-events: none; /* Allows clicks to pass through to buttons/links */
 }
 
+.global-header {
+    width: 40%;
+    padding-left: 5%;
+    padding-top: 5rem;
+}
+
 /* Global header + navigation */
 .main-nav {
     position: relative;
     margin-top: 0;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     gap: 0.5rem;
-    padding-left: 5%;
+    padding-left: 0;
     z-index: 10;
 }
 
@@ -53,15 +91,18 @@ nav {
     position: relative;
     margin-top: 0.75rem;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     gap: 0.5rem;
 }
 
 .nav-links {
     display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
+    flex-direction: row;
+    gap: 1.25rem;
     align-items: flex-start;
+    margin: 0;
+    padding: 0;
+    list-style: none;
 }
 
 .nav-links a {
@@ -70,39 +111,23 @@ nav {
     color: var(--text-grey);
     letter-spacing: 0.1rem;
     font-size: 1.18rem;
+    font-weight: 400;
 }
 
 h1 {
     font-size: 5rem;
-    font-weight: normal;
+    font-weight: 600;
     margin: 0;
     letter-spacing: -0.02rem;
-    align-items: flex-start;
-    padding-left: 5%;
+    line-height: 1;
+    padding-left: 0;
     text-align: left;
-    padding-top: 5%;
-    text-align: top;
+    padding-top: 0;
+    white-space: nowrap;
 }
 
-.subheader {
-    font-size: 1.5rem;
-    margin-top: 0.5rem;
-    opacity: 0.7;
-    align-items: flex-start;
-    padding-left: 5%;
-    text-align: left;
-}
-
-.hero {
-    height: 20vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-    padding-left: 5%;
-    text-align: left;
-    padding-top: 0%;
-    text-align: top;
+h2 {
+    font-weight: 600;
 }
 
 /* Page-specific content */
@@ -144,7 +169,6 @@ h1 {
     bottom: 5%;
     max-width: 260px;
     padding: 1.18rem 1.18rem;
-    font-family: Helvetica, Arial, sans-serif;
     background: none;
 }
 .work-list {
@@ -156,7 +180,6 @@ h1 {
     overflow-y: auto;
     text-align: right;
     color: #444444;
-    font-family: Helvetica, Arial, sans-serif;
     z-index: 20;
     background: none;
     padding: 1.5rem 0 1.5rem 0;
@@ -174,7 +197,7 @@ h1 {
 }
 
 body.dark-mode .project-link,
-body.dark-mode .project-link h3,
+body.dark-mode .project-link h2,
 body.dark-mode .project-link p {
     color: var(--text-grey);
 }
@@ -182,21 +205,31 @@ body.dark-mode .project-link p {
 .project-link:last-child {
     margin-bottom: 0;
 }
-.project-link h3 {
+.project-link h2 {
     font-size: 1.6rem;
-    font-weight: bold;
+    font-weight: 600;
     margin: 0 0 0.4rem 0;
     color: #444444;
     text-align: right;
 }
+
+#work .project-link h2 {
+    font-size: 2.2rem;
+    font-weight: 400;
+}
+
+#work .project-link p {
+    font-size: 1.35rem;
+}
+
 .project-link p {
     font-size: 1.18rem;
-    font-weight: normal;
+    font-weight: 200;
     margin: 0;
     color: #444444;
     text-align: right;
 }
-.project-link:hover h3,
+.project-link:hover h2,
 .project-link:hover p {
     color: #888888;
 }
@@ -210,7 +243,7 @@ body.dark-mode .project-link p {
 .contact-info {
     text-align: left;
     font-size: 1.0rem;
-    line-height: 1.6;
+    line-height: 1.4;
     color: var(--text-grey);
 }
 
@@ -244,8 +277,9 @@ body.dark-mode .project-link p {
     border: 1px solid var(--text-grey);
     color: var(--text-grey);
     cursor: pointer;
-    font-family: Helvetica, Arial, sans-serif;
+    font-family: 'PP Neue Montreal', Helvetica, Arial, sans-serif;
     font-size: 0.9rem;
+    font-weight: 400;
     letter-spacing: 0.05rem;
     transition: all 0.2s ease;
 }
@@ -260,65 +294,6 @@ body.dark-mode .project-link p {
     color: var(--bg-white);
 }
 
-body.project-page {
-    min-height: 100vh;
-    overflow-y: auto;
-    overflow-x: hidden;
-}
-
-body.project-page h1 {
-    padding-left: 0;
-    padding-right: 5%;
-    text-align: right;
-}
-
-body.project-page .subheader {
-    padding-left: 0;
-    padding-right: 5%;
-    text-align: right;
-}
-
-body.project-page .main-nav {
-    padding-left: 0;
-    padding-right: 5%;
-    align-items: flex-end;
-}
-
-body.project-page .nav-links {
-    align-items: flex-end;
-}
-
-body.project-page .nav-links a {
-    text-align: right;
-}
-
-body.project-page .project-content {
-    padding: 2rem 5% 5rem;
-    display: flex;
-    justify-content: flex-end;
-}
-
-body.project-page .project-content,
-body.project-page .project-content * {
-    text-align: right;
-}
-
-body.project-page .media-grid {
-    width: min(64vw, 920px);
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    gap: 1rem;
-}
-
-body.project-page .media-grid img,
-body.project-page .media-grid video {
-    width: 100%;
-    max-width: 100%;
-    height: auto;
-    display: block;
-}
-
 body.mn-page {
     display: block;
     min-height: 100vh;
@@ -327,7 +302,7 @@ body.mn-page {
 }
 
 body.mn-page .global-header,
-.left-identity {
+body.mn-page .left-identity {
     position: fixed;
     top: 0;
     left: 0;
@@ -336,7 +311,8 @@ body.mn-page .global-header,
     background: transparent;
 }
 
-body.mn-page main {
+body.mn-page main,
+body.mn-page .right-content {
     position: relative;
     top: 0;
     left: 0;
@@ -352,15 +328,9 @@ body.mn-page .page-section {
 
 body.mn-page .page-section,
 body.mn-page .bio-box,
-.right-content {
+body.mn-page .right-content {
     padding-left: 5%;
     padding-right: 5%;
-}
-
-.right-content {
-    width: 60%;
-    margin-left: 40%;
-    position: relative;
 }
 
 body.mn-page .bio-box {
@@ -496,25 +466,35 @@ body.mn-page .mn-image-row.bag34-row img {
     object-position: top;
 }
 
-@media (max-width: 767px) {
-    h1 {
-        font-size: 2.4rem;
-        padding: 5%;
-    }
-
-    .subheader,
-    .main-nav {
+@media (max-width: 1024px) {
+    .global-header,
+    body.mn-page .global-header,
+    body.mn-page .left-identity {
+        position: relative;
+        width: 100%;
         padding-left: 5%;
-        padding-right: 5%;
+        padding-top: 2.5rem;
+        z-index: 2;
+        background: transparent;
     }
 
-    .nav-links a {
-        font-size: 1rem;
+    .main-nav,
+    nav,
+    .nav-links {
+        flex-wrap: wrap;
+    }
+
+    body.mn-page main,
+    body.mn-page .right-content {
+        position: relative;
+        width: 100%;
+        margin-left: 0;
     }
 
     .bio-box,
     .contact-section,
-    .work-list {
+    .work-list,
+    body.mn-page .bio-box {
         position: relative;
         right: auto;
         left: auto;
@@ -528,6 +508,13 @@ body.mn-page .mn-image-row.bag34-row img {
         padding: 5%;
     }
 
+    body.mn-page .page-section,
+    body.mn-page .bio-box,
+    body.mn-page .right-content {
+        padding-left: 5%;
+        padding-right: 5%;
+    }
+
     .work-list {
         margin-top: 1rem;
     }
@@ -537,7 +524,7 @@ body.mn-page .mn-image-row.bag34-row img {
         margin-bottom: 1.5rem;
     }
 
-    .project-link h3,
+    .project-link h2,
     .project-link p {
         text-align: left;
     }
@@ -552,12 +539,6 @@ body.mn-page .mn-image-row.bag34-row img {
         left: auto;
         bottom: auto;
         padding: 0 5% 5%;
-    }
-
-    body.mn-page main {
-        position: relative;
-        top: auto;
-        left: auto;
     }
 
     body.mn-page .page-section {
@@ -578,26 +559,12 @@ body.mn-page .mn-image-row.bag34-row img {
     }
 }
 
-@media (max-width: 1024px) {
-    body.mn-page .global-header,
-    .left-identity {
-        position: relative;
-        width: 100%;
-        z-index: 2;
-        background: transparent;
+@media (max-width: 767px) {
+    h1 {
+        font-size: 2.4rem;
     }
 
-    body.mn-page main,
-    .right-content {
-        position: relative;
-        width: 100%;
-        margin-left: 0;
-    }
-
-    body.mn-page .page-section,
-    body.mn-page .bio-box,
-    .right-content {
-        padding-left: 5%;
-        padding-right: 5%;
+    .nav-links a {
+        font-size: 1rem;
     }
 }

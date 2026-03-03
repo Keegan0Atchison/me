@@ -23,49 +23,51 @@ renderer.domElement.style.zIndex = '-1';
 renderer.domElement.style.pointerEvents = 'none';
 document.body.appendChild(renderer.domElement);
 
-const geometry = new THREE.BufferGeometry();
-// Create a filled oval (ellipse) shape
-const segments = 32;
-const vertices = [];
-const indices = [];
-const radiusX = 3;
-const radiusY = 5;
+const geometry = new THREE.CylinderGeometry(0, 3.4, 13.5, 4, 2);
+geometry.rotateX(Math.PI / 2);
 let boidRenderScale = 1;
-
-// Add center vertex
-vertices.push(0, 0, 0);
-
-// Add vertices around the perimeter
-for (let i = 0; i < segments; i++) {
-    const angle = (i / segments) * Math.PI * 2;
-    vertices.push(
-        Math.cos(angle) * radiusX,
-        Math.sin(angle) * radiusY,
-        0
-    );
-}
-
-// Create triangle indices from center to perimeter
-for (let i = 0; i < segments; i++) {
-    const nextI = (i + 1) % segments;
-    indices.push(0, i + 1, nextI + 1);
-}
-
-geometry.setAttribute('position', new THREE.BufferAttribute(new Float32Array(vertices), 3));
-geometry.setIndex(new THREE.BufferAttribute(new Uint32Array(indices), 1));
+const rotationSpeed = 0.1;
+const velocityThresholdSq = 0.01;
+const FORWARD_AXIS = new THREE.Vector3(0, 0, 1);
 
 // Light grey solid ovals (subtle background)
-const material = new THREE.MeshBasicMaterial({ color: 0xcccccc, wireframe: false }); 
+const material = new THREE.MeshBasicMaterial({
+    color: 0x000000,
+    wireframe: false,
+    transparent: true,
+    opacity: 0.82,
+    flatShading: true
+});
 const mesh = new THREE.InstancedMesh(geometry, material, NUM_BOIDS);
 scene.add(mesh);
 
 const dummy = new THREE.Object3D();
+const velocityDirection = new THREE.Vector3();
+const boidQuaternions = Array.from({ length: NUM_BOIDS }, () => new THREE.Quaternion());
+const boidTargetQuaternions = Array.from({ length: NUM_BOIDS }, () => new THREE.Quaternion());
+
+function initializeBoidOrientations() {
+    for (let i = 0; i < NUM_BOIDS; i++) {
+        const vx = boids.velocities[i * 2];
+        const vy = boids.velocities[i * 2 + 1];
+        const speedSq = vx * vx + vy * vy;
+
+        if (speedSq > velocityThresholdSq) {
+            velocityDirection.set(vx, vy, 0).normalize();
+            boidTargetQuaternions[i].setFromUnitVectors(FORWARD_AXIS, velocityDirection);
+            boidQuaternions[i].copy(boidTargetQuaternions[i]);
+        } else {
+            boidQuaternions[i].identity();
+            boidTargetQuaternions[i].identity();
+        }
+    }
+}
 
 function getBoidRenderScale(screenWidth) {
-    if (screenWidth < 480) return 0.55;
+    if (screenWidth < 480) return 0.56;
     if (screenWidth < 768) return 0.72;
-    if (screenWidth < 1024) return 0.86;
-    return 1;
+    if (screenWidth < 1024) return 0.84;
+    return 0.98;
 }
 
 function handleResize() {
@@ -91,10 +93,19 @@ function animate() {
     boids.update(window.innerWidth, window.innerHeight);
 
     for (let i = 0; i < NUM_BOIDS; i++) {
+        const vx = boids.velocities[i * 2];
+        const vy = boids.velocities[i * 2 + 1];
+        const speedSq = vx * vx + vy * vy;
+
+        if (speedSq > velocityThresholdSq) {
+            velocityDirection.set(vx, vy, 0).normalize();
+            boidTargetQuaternions[i].setFromUnitVectors(FORWARD_AXIS, velocityDirection);
+            boidQuaternions[i].slerp(boidTargetQuaternions[i], rotationSpeed);
+        }
+
         dummy.position.set(boids.positions[i * 2], boids.positions[i * 2 + 1], 0);
         dummy.scale.set(boidRenderScale, boidRenderScale, 1);
-        // Point in direction of travel
-        dummy.rotation.z = Math.atan2(boids.velocities[i * 2 + 1], boids.velocities[i * 2]) - Math.PI / 2;
+        dummy.quaternion.copy(boidQuaternions[i]);
         dummy.updateMatrix();
         mesh.setMatrixAt(i, dummy.matrix);
     }
@@ -132,6 +143,7 @@ navLinks.forEach(link => {
 const initialSection = window.location.hash ? window.location.hash.substring(1) : 'home';
 showSection(initialSection);
 
+initializeBoidOrientations();
 handleResize();
 
 // Theme toggle functionality
@@ -179,13 +191,13 @@ function updateTheme(theme) {
         root.style.setProperty('--bg-white', '#1a1a1a');
         root.style.setProperty('--text-grey', '#cccccc');
         scene.background = new THREE.Color(0x1a1a1a);
-        material.color.set(0x888888); // darker gray for boids in dark mode
+        material.color.set(0xffffff);
         document.body.classList.add('dark-mode');
     } else {
         root.style.setProperty('--bg-white', '#ffffff');
-        root.style.setProperty('--text-grey', '#888888');
+        root.style.setProperty('--text-grey', '#555555');
         scene.background = new THREE.Color(0xffffff);
-        material.color.set(0xdddddd); // lighter gray for boids in light mode
+        material.color.set(0x000000);
         document.body.classList.remove('dark-mode');
     }
 }
