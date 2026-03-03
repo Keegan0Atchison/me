@@ -2,7 +2,7 @@
 export class BoidLogic {
     constructor(numBoids, width, height) {
         this.numBoids = numBoids;
-        this.params = {
+        this.baseParams = {
             visualRange: 80,
             protectedRange: 18,
             centeringFactor: 0.0008,
@@ -15,12 +15,25 @@ export class BoidLogic {
             maxbias: 0.01,
             bias_increment: 0.00004
         };
+        this.params = { ...this.baseParams };
 
         this.positions = new Float32Array(numBoids * 2);
         this.velocities = new Float32Array(numBoids * 2);
         this.scoutGroup = new Uint8Array(numBoids); // 0: normal, 1: scout group 1 (right), 2: scout group 2 (left)
         this.biasVal = new Float32Array(numBoids); // bias strength for each boid
+        this.setResponsiveScale(width, height);
         this.init(width, height);
+    }
+
+    setResponsiveScale(width, height) {
+        const minScreen = Math.min(width, height);
+        const widthScale = Math.max(0.58, Math.min(1, width / 1280));
+
+        this.params.visualRange = this.baseParams.visualRange * widthScale;
+        this.params.protectedRange = this.baseParams.protectedRange * widthScale;
+        this.params.maxSpeed = this.baseParams.maxSpeed * Math.max(0.85, widthScale);
+        this.params.minSpeed = this.baseParams.minSpeed * Math.max(0.85, widthScale);
+        this.params.margin = Math.max(40, Math.min(this.baseParams.margin, minScreen * 0.2));
     }
 
     init(width, height) {
@@ -79,6 +92,8 @@ export class BoidLogic {
     }
 
     update(width, height) {
+        this.setResponsiveScale(width, height);
+
         // Define margins based on current screen size
         const leftmargin = this.params.margin;
         const rightmargin = width - this.params.margin;

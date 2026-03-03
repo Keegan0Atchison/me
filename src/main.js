@@ -30,6 +30,7 @@ const vertices = [];
 const indices = [];
 const radiusX = 3;
 const radiusY = 5;
+let boidRenderScale = 1;
 
 // Add center vertex
 vertices.push(0, 0, 0);
@@ -60,6 +61,30 @@ scene.add(mesh);
 
 const dummy = new THREE.Object3D();
 
+function getBoidRenderScale(screenWidth) {
+    if (screenWidth < 480) return 0.55;
+    if (screenWidth < 768) return 0.72;
+    if (screenWidth < 1024) return 0.86;
+    return 1;
+}
+
+function handleResize() {
+    width = window.innerWidth;
+    height = window.innerHeight;
+
+    boidRenderScale = getBoidRenderScale(width);
+    boids.setResponsiveScale(width, height);
+
+    renderer.setSize(width, height);
+
+    camera.aspect = width / Math.max(height, 1);
+    camera.left = 0;
+    camera.right = width;
+    camera.top = height;
+    camera.bottom = 0;
+    camera.updateProjectionMatrix();
+}
+
 function animate() {
     requestAnimationFrame(animate);
     
@@ -67,6 +92,7 @@ function animate() {
 
     for (let i = 0; i < NUM_BOIDS; i++) {
         dummy.position.set(boids.positions[i * 2], boids.positions[i * 2 + 1], 0);
+        dummy.scale.set(boidRenderScale, boidRenderScale, 1);
         // Point in direction of travel
         dummy.rotation.z = Math.atan2(boids.velocities[i * 2 + 1], boids.velocities[i * 2]) - Math.PI / 2;
         dummy.updateMatrix();
@@ -77,17 +103,7 @@ function animate() {
     renderer.render(scene, camera);
 }
 
-window.addEventListener('resize', () => {
-    width = window.innerWidth;
-    height = window.innerHeight;
-    renderer.setSize(width, height);
-    camera.left = 0;
-    camera.right = width;
-    camera.top = height;
-    camera.bottom = 0;
-    camera.updateProjectionMatrix();
-    boids.update(width, height);
-});
+window.onresize = handleResize;
 
 // Page switcher functionality
 const navLinks = document.querySelectorAll('.nav-links a');
@@ -115,6 +131,8 @@ navLinks.forEach(link => {
 
 const initialSection = window.location.hash ? window.location.hash.substring(1) : 'home';
 showSection(initialSection);
+
+handleResize();
 
 // Theme toggle functionality
 const themeButtons = document.querySelectorAll('.theme-btn');
