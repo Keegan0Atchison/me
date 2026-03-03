@@ -3,6 +3,10 @@
     --text-grey: #888888;
 }
 
+* {
+    box-sizing: border-box;
+}
+
 *,
 *::before,
 *::after {
@@ -316,22 +320,47 @@ body.project-page .media-grid video {
 }
 
 body.mn-page {
+    display: block;
     min-height: 100vh;
     overflow-y: auto;
     overflow-x: hidden;
 }
 
-body.mn-page main {
-    position: absolute;
+body.mn-page .global-header,
+.left-identity {
+    position: fixed;
     top: 0;
     left: 0;
-    width: 100%;
+    width: 40%;
+    z-index: 2;
+    background: transparent;
+}
+
+body.mn-page main {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 60%;
+    margin-left: 40%;
 }
 
 body.mn-page .page-section {
     padding: 5% 5% 5rem;
     display: flex;
     justify-content: flex-end;
+}
+
+body.mn-page .page-section,
+body.mn-page .bio-box,
+.right-content {
+    padding-left: 5%;
+    padding-right: 5%;
+}
+
+.right-content {
+    width: 60%;
+    margin-left: 40%;
+    position: relative;
 }
 
 body.mn-page .bio-box {
@@ -546,5 +575,29 @@ body.mn-page .mn-image-row.bag34-row img {
     body.mn-page .TMD-image-row,
     body.mn-page .geo-image-row.art67-row {
         grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 1024px) {
+    body.mn-page .global-header,
+    .left-identity {
+        position: relative;
+        width: 100%;
+        z-index: 2;
+        background: transparent;
+    }
+
+    body.mn-page main,
+    .right-content {
+        position: relative;
+        width: 100%;
+        margin-left: 0;
+    }
+
+    body.mn-page .page-section,
+    body.mn-page .bio-box,
+    .right-content {
+        padding-left: 5%;
+        padding-right: 5%;
     }
 }
