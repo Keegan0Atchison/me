@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta name="color-scheme" content="dark light" />
+	<title>Art, Me | Keegan Atchison</title>
+	<script>
+		(() => {
+			const params = new URLSearchParams(window.location.search);
+			const theme = params.get('theme') || localStorage.getItem('theme') || 'dark';
+			const root = document.documentElement;
+
+			if (theme === 'dark') {
+				root.style.setProperty('--bg-white', '#1a1a1a');
+				root.style.setProperty('--text-grey', '#cccccc');
+				root.style.backgroundColor = '#1a1a1a';
+				root.classList.add('dark-mode');
+			} else {
+				root.style.setProperty('--bg-white', '#ffffff');
+				root.style.setProperty('--text-grey', '#888888');
+				root.style.backgroundColor = '#ffffff';
+				root.classList.remove('dark-mode');
+			}
+		})();
+	</script>
+	<link rel="stylesheet" href="/src/style.css">
+</head>
+<body class="mn-page">
+	<header class="global-header">
+		<h1>Keegan Atchison</h1>
+		<p class="subheader">Engineer + Designer</p>
+		<nav class="main-nav">
+			<div class="nav-links">
+				<a href="../index.html#home">Home</a>
+				<a href="../index.html#work">Work</a>
+				<a href="../index.html#about">Contact</a>
+			</div>
+		</nav>
+	</header>
+
+	<main>
+		<section class="page-section" aria-label="Art page content">
+			<aside class="bio-box">
+				<h3>Bioremediation Tapestry, Terreform ONE</h3>
+				<div class="mn-image-row tapestry-feature-row" aria-label="Microneedle project images">
+					<img src="../assets/TAP2.jpg" alt="Microneedle project image MN3">
+				</div>
+				<p>The bioremediation tapestry is a living, modular textile engineered to heal scorched earth. Designed for application in post-wildfire landscapes, the biomaterial system delivers bacteria, fungi, and nutrients directly to depleted soil. Through integrating material science with architectural design, the tapestry stabilizes terrain burned by forest fires and accelerates the restoration of ecosystems.</p>
+				<p>Materials: kelp, clay, soil, fungi, turmeric, spirulina.</p>
+				<p>PROCESS</p>
+				<div class="mn-image-row tapestry-feature-row" aria-label="Microneedle project images">
+					<img src="../assets/TAP1.png" alt="Microneedle project image MN4">
+				</div>
+				<p>Material Science & Formulation: My role was to conduct material literature review, material formulation, and rheological testing. I produced a mixture with load bearing structural properties to improve soil and ecosystem health. </p>
+				<div class="mn-image-row tapestry-feature-row" aria-label="Microneedle project images">
+					<img src="../assets/tex3.JPG" alt="Microneedle project image MN3">
+				</div>
+				<p>Production & Scaling: My role was to design and build all biomaterial 3D printers, suitable to print composite materials with large particle size and variety. I built a large-scale 3D print farm and worked with a team to produce a 10-square-meter printed tile tapestry. The task demonstrates the ability to scale and maintain industrial-size production. </p>
+			</aside>
+		</section>
+	</main>
+
+	<script>
+		(() => {
+			const root = document.documentElement;
+			const params = new URLSearchParams(window.location.search);
+			const theme = params.get('theme') || localStorage.getItem('theme') || 'dark';
+
+			function applyTheme(selectedTheme) {
+				if (selectedTheme === 'dark') {
+					root.style.setProperty('--bg-white', '#1a1a1a');
+					root.style.setProperty('--text-grey', '#cccccc');
+					document.body.classList.add('dark-mode');
+					document.body.style.backgroundColor = '#1a1a1a';
+				} else {
+					root.style.setProperty('--bg-white', '#ffffff');
+					root.style.setProperty('--text-grey', '#888888');
+					document.body.classList.remove('dark-mode');
+					document.body.style.backgroundColor = '#ffffff';
+				}
+
+				localStorage.setItem('theme', selectedTheme);
+
+				document.querySelectorAll('nav a').forEach(link => {
+					const href = link.getAttribute('href');
+					if (!href) {
+						return;
+					}
+
+					const url = new URL(href, window.location.href);
+					url.searchParams.set('theme', selectedTheme);
+					link.setAttribute('href', `${url.pathname}${url.search}${url.hash}`);
+				});
+			}
+
+			applyTheme(theme);
+		})();
+	</script>
+</body>
+</html>

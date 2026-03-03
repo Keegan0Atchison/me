@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta name="color-scheme" content="dark light" />
+	<title>Art, Me | Keegan Atchison</title>
+	<script>
+		(() => {
+			const params = new URLSearchParams(window.location.search);
+			const theme = params.get('theme') || localStorage.getItem('theme') || 'dark';
+			const root = document.documentElement;
+
+			if (theme === 'dark') {
+				root.style.setProperty('--bg-white', '#1a1a1a');
+				root.style.setProperty('--text-grey', '#cccccc');
+				root.style.backgroundColor = '#1a1a1a';
+				root.classList.add('dark-mode');
+			} else {
+				root.style.setProperty('--bg-white', '#ffffff');
+				root.style.setProperty('--text-grey', '#888888');
+				root.style.backgroundColor = '#ffffff';
+				root.classList.remove('dark-mode');
+			}
+		})();
+	</script>
+	<link rel="stylesheet" href="/src/style.css">
+</head>
+<body class="mn-page">
+	<header class="global-header">
+		<h1>Keegan Atchison</h1>
+		<p class="subheader">Engineer + Designer</p>
+		<nav class="main-nav">
+			<div class="nav-links">
+				<a href="../index.html#home">Home</a>
+				<a href="../index.html#work">Work</a>
+				<a href="../index.html#about">Contact</a>
+			</div>
+		</nav>
+	</header>
+
+	<main>
+		<section class="page-section" aria-label="Art page content">
+			<aside class="bio-box">
+				<h3>Microneedle Immunoglobulin Therapy, NYU Global Innovation Initiative</h3>
+				<div class="mn-image-row" aria-label="Microneedle project images">
+					<img src="../assets/MN3.png" alt="Microneedle project image MN3">
+					<img src="../assets/MN4.png" alt="Microneedle project image MN4">
+				</div>
+				<p>Immunoglobulins (Ig) are essential antibodies in the human immune system and are widely used to treat immunodeficiencies, autoimmune disorders, and acute allergic reactions. The global immunoglobulin market size is $16.24 billion, with the US responsible for $9.73 billion of that total (2023 Fortune). Currently, Ig therapy is administered either intravenously (IVIG) on a monthly basis or subcutaneously (SCIG) weekly. IVIG administration takes between 2 and 5 hours, while SCIG takes 30 to 90 minutes per session (ASCIA and Grifols). Additionally, IVIG and SCIG treatments require strict cold-chain storage (2–8°C), which limits accessibility, increases costs, and complicates rapid administration in emergency or low-resource settings.</p>
+				<p>To address these challenges, bIg G proposes a solid, microneedle patch Ig product that improves the patient experience and enables long-term storage, reduced transportation costs, and stable global supply chains. By converting immunoglobulins into a stable powdered form, patients no longer have to undergo long injection sessions. Drying methods such as lyophilization and spray drying are evaluated to minimize denaturation while producing a uniform, easily rehydratable powder. The final formulation focuses on optimizing particle size, solubility, and stability to enable rapid administration and consistent dosing.</p>
+				<p>A microneedle product has the potential to reduce reliance on cold-chain logistics, improve global accessibility to immunoglobulin therapies, and enable faster, more versatile administration in both clinical and emergency contexts. The cost of shipping can be reduced from 8% to 43% and reduce drug weight by 40x for domestic and 80x for international transport (Argonaut Manufacturing Services). By re-engineering how immunoglobulins are stored and delivered, this project aims to make antibody-based therapies more scalable, cost-effective, and adaptable to real-world healthcare needs.</p>
+				<div class="mn-image-row" aria-label="Microneedle project images">
+					<img src="../assets/MN2.png" alt="Microneedle project image MN3">
+					<img src="../assets/MN7.png" alt="Microneedle project image MN4">
+				</div>
+				<p>PROCESS</p>
+				<p>My role is the design + research of the microneedle patch, supply chain analysis, and raw material cost estimates. I have conducted literature reviews of current Ig therapy treatments, microneedle patch applications, and existing microneedle patch patents. The product is currently under development and in talks with manufacturers. bIg G was selected by NYU’s Global Innovation Initiative, where I work alongside three other founders to improve patient experience and health.</p>
+				<p></p>
+			</aside>
+		</section>
+	</main>
+
+	<script>
+		(() => {
+			const root = document.documentElement;
+			const params = new URLSearchParams(window.location.search);
+			const theme = params.get('theme') || localStorage.getItem('theme') || 'dark';
+
+			function applyTheme(selectedTheme) {
+				if (selectedTheme === 'dark') {
+					root.style.setProperty('--bg-white', '#1a1a1a');
+					root.style.setProperty('--text-grey', '#cccccc');
+					document.body.classList.add('dark-mode');
+					document.body.style.backgroundColor = '#1a1a1a';
+				} else {
+					root.style.setProperty('--bg-white', '#ffffff');
+					root.style.setProperty('--text-grey', '#888888');
+					document.body.classList.remove('dark-mode');
+					document.body.style.backgroundColor = '#ffffff';
+				}
+
+				localStorage.setItem('theme', selectedTheme);
+
+				document.querySelectorAll('nav a').forEach(link => {
+					const href = link.getAttribute('href');
+					if (!href) {
+						return;
+					}
+
+					const url = new URL(href, window.location.href);
+					url.searchParams.set('theme', selectedTheme);
+					link.setAttribute('href', `${url.pathname}${url.search}${url.hash}`);
+				});
+			}
+
+			applyTheme(theme);
+		})();
+	</script>
+</body>
+</html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta name="color-scheme" content="dark light" />
+	<title>Art, Me | Keegan Atchison</title>
+	<script>
+		(() => {
+			const params = new URLSearchParams(window.location.search);
+			const theme = params.get('theme') || localStorage.getItem('theme') || 'dark';
+			const root = document.documentElement;
+
+			if (theme === 'dark') {
+				root.style.setProperty('--bg-white', '#1a1a1a');
+				root.style.setProperty('--text-grey', '#cccccc');
+				root.style.backgroundColor = '#1a1a1a';
+				root.classList.add('dark-mode');
+			} else {
+				root.style.setProperty('--bg-white', '#ffffff');
+				root.style.setProperty('--text-grey', '#888888');
+				root.style.backgroundColor = '#ffffff';
+				root.classList.remove('dark-mode');
+			}
+		})();
+	</script>
+	<link rel="stylesheet" href="/src/style.css">
+</head>
+<body class="mn-page">
+	<header class="global-header">
+		<h1>Keegan Atchison</h1>
+		<p class="subheader">Engineer + Designer</p>
+		<nav class="main-nav">
+			<div class="nav-links">
+				<a href="../index.html#home">Home</a>
+				<a href="../index.html#work">Work</a>
+				<a href="../index.html#about">Contact</a>
+			</div>
+		</nav>
+	</header>
+
+<main>
+		<section class="page-section" aria-label="Art page content">
+			<aside class="bio-box">
+				<h3>Hydrogen Energy Electrocatalysts, NYU Taylor Lab</h3>
+				<div class="TMD-image-row" aria-label="Microneedle project images">
+					<img src="../assets/TMD3.png" alt="Microneedle project image MN3">
+					<img src="../assets/TMD2.png" alt="Microneedle project image MN4">
+				</div>
+				<p>At the NYU TMD Lab, I developed amorphous platinum-based electrocatalysts using flash Joule heating, contributing to hydrogen and solar energy research in collaboration with multidisciplinary teams. My work focused on advancing scalable materials for clean energy applications while integrating experimental development with broader technological goals. I presented my technical findings at the TMD Lab Conference, demonstrating the ability to translate complex R&D outcomes into clear, stakeholder-facing communication.</p>	
+				<p>PROCESS</p>
+				<p>I worked closely with a PhD advisor to design and develop my electrocatalyst materials and processes. I learned how to effectively conduct literature reviews and understand the foundational principles of a new field. My analytical skills and scientific methodology were solidified during this time.</p>
+			</aside>
+		</section>
+	</main>
+
+
+	<script>
+		(() => {
+			const root = document.documentElement;
+			const params = new URLSearchParams(window.location.search);
+			const theme = params.get('theme') || localStorage.getItem('theme') || 'dark';
+
+			function applyTheme(selectedTheme) {
+				if (selectedTheme === 'dark') {
+					root.style.setProperty('--bg-white', '#1a1a1a');
+					root.style.setProperty('--text-grey', '#cccccc');
+					document.body.classList.add('dark-mode');
+					document.body.style.backgroundColor = '#1a1a1a';
+				} else {
+					root.style.setProperty('--bg-white', '#ffffff');
+					root.style.setProperty('--text-grey', '#888888');
+					document.body.classList.remove('dark-mode');
+					document.body.style.backgroundColor = '#ffffff';
+				}
+
+				localStorage.setItem('theme', selectedTheme);
+
+				document.querySelectorAll('nav a').forEach(link => {
+					const href = link.getAttribute('href');
+					if (!href) {
+						return;
+					}
+
+					const url = new URL(href, window.location.href);
+					url.searchParams.set('theme', selectedTheme);
+					link.setAttribute('href', `${url.pathname}${url.search}${url.hash}`);
+				});
+			}
+
+			applyTheme(theme);
+		})();
+	</script>
+</body>
+</html>

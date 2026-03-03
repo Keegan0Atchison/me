@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta name="color-scheme" content="dark light" />
+	<title>Art, Me | Keegan Atchison</title>
+	<script>
+		(() => {
+			const params = new URLSearchParams(window.location.search);
+			const theme = params.get('theme') || localStorage.getItem('theme') || 'dark';
+			const root = document.documentElement;
+
+			if (theme === 'dark') {
+				root.style.setProperty('--bg-white', '#1a1a1a');
+				root.style.setProperty('--text-grey', '#cccccc');
+				root.style.backgroundColor = '#1a1a1a';
+				root.classList.add('dark-mode');
+			} else {
+				root.style.setProperty('--bg-white', '#ffffff');
+				root.style.setProperty('--text-grey', '#888888');
+				root.style.backgroundColor = '#ffffff';
+				root.classList.remove('dark-mode');
+			}
+		})();
+	</script>
+	<link rel="stylesheet" href="/src/style.css">
+</head>
+<body class="mn-page">
+	<header class="global-header">
+		<h1>Keegan Atchison</h1>
+		<p class="subheader">Engineer + Designer</p>
+		<nav class="main-nav">
+			<div class="nav-links">
+				<a href="../index.html#home">Home</a>
+				<a href="../index.html#work">Work</a>
+				<a href="../index.html#about">Contact</a>
+			</div>
+		</nav>
+	</header>
+
+	<main>
+		<section class="page-section" aria-label="Art page content">
+			<aside class="bio-box">
+				<h3>Art</h3>
+				<div class="mn-image-row geo art-video-row" aria-label="Geopolymer column video 3D2">
+					<video autoplay muted loop playsinline>
+						<source src="../assets/3D2.webm" type="video/webm">
+					</video>
+				</div>
+				<p></p>
+				<div class="mn-image-row geo art-video-row" aria-label="Geopolymer column video 3D3">
+					<video class="art-video-crop-vertical" autoplay muted loop playsinline>
+						<source src="../assets/3D3.webm" type="video/webm">
+					</video>
+				</div>
+				<p></p>
+				<div class="geo-image-row art24-row" aria-label="Microneedle project images">
+					<img src="../assets/Art4.png" alt="Microneedle project image MN3">
+					<img src="../assets/Art9.png" alt="Microneedle project image MN4">
+				</div>
+				<p></p>
+				<div class="geo-image-row art67-row" aria-label="Microneedle project images">
+					<img src="../assets/Art8.png" alt="Microneedle project image MN3">
+					<img src="../assets/Art6.png" alt="Microneedle project image MN3">
+					<img src="../assets/Art7.png" alt="Microneedle project image MN4">
+				</div>
+				<div class="mn-image-row bag12-row" aria-label="Microneedle project images">
+					<img src="../assets/bag1.png" alt="Microneedle project image MN3">
+					<img src="../assets/bag2.png" alt="Microneedle project image MN4">
+				</div>
+				<div class="mn-image-row bag34-row" aria-label="Microneedle project images">
+					<img src="../assets/bag3.png" alt="Microneedle project image MN3">
+					<img src="../assets/bag4.png" alt="Microneedle project image MN4">
+				</div>
+			</aside>
+		</section>
+	</main>
+
+	<script>
+		(() => {
+			const root = document.documentElement;
+			const params = new URLSearchParams(window.location.search);
+			const theme = params.get('theme') || localStorage.getItem('theme') || 'dark';
+
+			function applyTheme(selectedTheme) {
+				if (selectedTheme === 'dark') {
+					root.style.setProperty('--bg-white', '#1a1a1a');
+					root.style.setProperty('--text-grey', '#cccccc');
+					document.body.classList.add('dark-mode');
+					document.body.style.backgroundColor = '#1a1a1a';
+				} else {
+					root.style.setProperty('--bg-white', '#ffffff');
+					root.style.setProperty('--text-grey', '#888888');
+					document.body.classList.remove('dark-mode');
+					document.body.style.backgroundColor = '#ffffff';
+				}
+
+				localStorage.setItem('theme', selectedTheme);
+
+				document.querySelectorAll('nav a').forEach(link => {
+					const href = link.getAttribute('href');
+					if (!href) {
+						return;
+					}
+
+					const url = new URL(href, window.location.href);
+					url.searchParams.set('theme', selectedTheme);
+					link.setAttribute('href', `${url.pathname}${url.search}${url.hash}`);
+				});
+			}
+
+			applyTheme(theme);
+		})();
+	</script>
+</body>
+</html>

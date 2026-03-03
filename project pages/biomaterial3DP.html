@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta name="color-scheme" content="dark light" />
+	<title>Art, Me | Keegan Atchison</title>
+	<script>
+		(() => {
+			const params = new URLSearchParams(window.location.search);
+			const theme = params.get('theme') || localStorage.getItem('theme') || 'dark';
+			const root = document.documentElement;
+
+			if (theme === 'dark') {
+				root.style.setProperty('--bg-white', '#1a1a1a');
+				root.style.setProperty('--text-grey', '#cccccc');
+				root.style.backgroundColor = '#1a1a1a';
+				root.classList.add('dark-mode');
+			} else {
+				root.style.setProperty('--bg-white', '#ffffff');
+				root.style.setProperty('--text-grey', '#888888');
+				root.style.backgroundColor = '#ffffff';
+				root.classList.remove('dark-mode');
+			}
+		})();
+	</script>
+	<link rel="stylesheet" href="/src/style.css">
+</head>
+<body class="mn-page">
+	<header class="global-header">
+		<h1>Keegan Atchison</h1>
+		<p class="subheader">Engineer + Designer</p>
+		<nav class="main-nav">
+			<div class="nav-links">
+				<a href="../index.html#home">Home</a>
+				<a href="../index.html#work">Work</a>
+				<a href="../index.html#about">Contact</a>
+			</div>
+		</nav>
+	</header>
+
+	<main>
+		<section class="page-section" aria-label="Art page content">
+			<aside class="bio-box">
+				<h3>Biomaterial 3D Printer + Print Farm</h3>
+				<div class="mn-image-row biomat-video-row" aria-label="Biomaterial 3D printer videos">
+					<video autoplay muted loop playsinline>
+						<source src="../assets/3d5.webm" type="video/webm">
+					</video>
+					<video autoplay muted loop playsinline>
+						<source src="../assets/3d7.webm" type="video/webm">
+					</video>
+				</div>
+				<p>Large scale biomaterial 3D printer (left) on delta printer. Small scale clay 3D printer (right) on retrofitted Ender 3 Pro. </p>
+				<p>40+ prototypes of biomaterial printers over 16 months. Produced working print farm for the production of 10-square-meter biocomposite tiles. Extruders and code work for delta, cartesian, and robotic arm 3D printers.</p>
+				<h3>Small Scale 3D Printer</h3>
+				<div class="mn-image-row" aria-label="Microneedle project images">
+					<img src="../assets/WASP1.jpg" alt="Microneedle project image MN3">
+					<img src="../assets/Standard V1 December 2024.jpg" alt="Microneedle project image MN4">
+				</div>
+				<h3>Large Scale 3D Printer</h3>
+				<div class="mn-image-row" aria-label="Microneedle project images">
+					<img src="../assets/3Axis1.jpg" alt="Microneedle project image MN3">
+					<img src="../assets/3Axis2.jpg" alt="Microneedle project image MN4">
+				</div>
+				<div class="mn-image-row" aria-label="Microneedle project images">
+					<img src="../assets/StandardHuge1.jpg" alt="Microneedle project image MN3">
+					<img src="../assets/StandardHuge2.jpg" alt="Microneedle project image MN4">
+				</div>
+				<div class="mn-image-row" aria-label="Microneedle project images">
+					<img src="../assets/V12.jpg" alt="Microneedle project image MN3">
+					<img src="../assets/V11.jpg" alt="Microneedle project image MN4">
+				</div>
+
+			</aside>
+		</section>
+	</main>
+
+	<script>
+		(() => {
+			const root = document.documentElement;
+			const params = new URLSearchParams(window.location.search);
+			const theme = params.get('theme') || localStorage.getItem('theme') || 'dark';
+
+			function applyTheme(selectedTheme) {
+				if (selectedTheme === 'dark') {
+					root.style.setProperty('--bg-white', '#1a1a1a');
+					root.style.setProperty('--text-grey', '#cccccc');
+					document.body.classList.add('dark-mode');
+					document.body.style.backgroundColor = '#1a1a1a';
+				} else {
+					root.style.setProperty('--bg-white', '#ffffff');
+					root.style.setProperty('--text-grey', '#888888');
+					document.body.classList.remove('dark-mode');
+					document.body.style.backgroundColor = '#ffffff';
+				}
+
+				localStorage.setItem('theme', selectedTheme);
+
+				document.querySelectorAll('nav a').forEach(link => {
+					const href = link.getAttribute('href');
+					if (!href) {
+						return;
+					}
+
+					const url = new URL(href, window.location.href);
+					url.searchParams.set('theme', selectedTheme);
+					link.setAttribute('href', `${url.pathname}${url.search}${url.hash}`);
+				});
+			}
+
+			applyTheme(theme);
+		})();
+	</script>
+</body>
+</html>
