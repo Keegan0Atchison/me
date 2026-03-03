@@ -19,11 +19,12 @@ renderer.setSize(width, height);
 renderer.domElement.style.position = 'fixed';
 renderer.domElement.style.top = '0';
 renderer.domElement.style.left = '0';
+renderer.domElement.style.transform = 'none';
 renderer.domElement.style.zIndex = '-1';
 renderer.domElement.style.pointerEvents = 'none';
 document.body.appendChild(renderer.domElement);
 
-const geometry = new THREE.CylinderGeometry(0, 3.4, 13.5, 4, 2);
+const geometry = new THREE.CylinderGeometry(0, 2.72, 10.8, 4, 2);
 geometry.rotateX(Math.PI / 2);
 let boidRenderScale = 1;
 const rotationSpeed = 0.1;
@@ -64,10 +65,10 @@ function initializeBoidOrientations() {
 }
 
 function getBoidRenderScale(screenWidth) {
-    if (screenWidth < 480) return 0.56;
-    if (screenWidth < 768) return 0.72;
-    if (screenWidth < 1024) return 0.84;
-    return 0.98;
+    if (screenWidth < 480) return 0.45;
+    if (screenWidth < 768) return 0.58;
+    if (screenWidth < 1024) return 0.67;
+    return 0.78;
 }
 
 function handleResize() {
@@ -90,7 +91,7 @@ function handleResize() {
 function animate() {
     requestAnimationFrame(animate);
     
-    boids.update(window.innerWidth, window.innerHeight);
+    boids.update(width, height);
 
     for (let i = 0; i < NUM_BOIDS; i++) {
         const vx = boids.velocities[i * 2];

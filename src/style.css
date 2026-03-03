@@ -1,6 +1,7 @@
 :root {
     --bg-white: #ffffff;
     --text-grey: #555555;
+    --frame-pad: 4rem;
 }
 
 @font-face {
@@ -48,6 +49,19 @@ body, html {
     line-height: 1.4;
 }
 
+html {
+    font-size: 80%;
+    -webkit-text-size-adjust: none;
+    text-size-adjust: none;
+}
+
+body {
+    width: 100%;
+    min-width: 100%;
+    margin: 0;
+    position: relative;
+}
+
 p,
 .bio-box p,
 .contact-info p {
@@ -66,14 +80,16 @@ canvas {
     position: fixed;
     top: 0;
     left: 0;
+    transform: none;
     z-index: -1; /* Puts it behind everything */
     pointer-events: none; /* Allows clicks to pass through to buttons/links */
 }
 
 .global-header {
-    width: 40%;
-    padding-left: 5%;
-    padding-top: 5rem;
+    width: 32%;
+    padding-left: var(--frame-pad);
+    padding-right: var(--frame-pad);
+    padding-top: var(--frame-pad);
 }
 
 /* Global header + navigation */
@@ -82,23 +98,25 @@ canvas {
     margin-top: 0;
     display: flex;
     flex-direction: row;
-    gap: 0.5rem;
+    gap: 0.4rem;
     padding-left: 0;
+    justify-content: flex-start;
+    width: max-content;
     z-index: 10;
 }
 
 nav {
     position: relative;
-    margin-top: 0.75rem;
+    margin-top: 0.6rem;
     display: flex;
     flex-direction: row;
-    gap: 0.5rem;
+    gap: 0.4rem;
 }
 
 .nav-links {
     display: flex;
     flex-direction: row;
-    gap: 1.25rem;
+    gap: 1rem;
     align-items: flex-start;
     margin: 0;
     padding: 0;
@@ -109,13 +127,13 @@ nav {
     display: inline-block;
     text-decoration: none;
     color: var(--text-grey);
-    letter-spacing: 0.1rem;
+    letter-spacing: 0.08rem;
     font-size: 1.18rem;
     font-weight: 400;
 }
 
 h1 {
-    font-size: 5rem;
+    font-size: 4rem;
     font-weight: 600;
     margin: 0;
     letter-spacing: -0.02rem;
@@ -124,6 +142,7 @@ h1 {
     text-align: left;
     padding-top: 0;
     white-space: nowrap;
+    width: max-content;
 }
 
 h2 {
@@ -146,7 +165,7 @@ h2 {
 
 .bio-box {
     position: fixed;
-    right: 5%;
+    right: var(--frame-pad);
     bottom: 5%;
     max-width: 260px;
     padding: 1.25rem 1.5rem;
@@ -165,7 +184,7 @@ h2 {
 
 .contact-section {
     position: fixed;
-    right: 5%;
+    right: var(--frame-pad);
     bottom: 5%;
     max-width: 260px;
     padding: 1.18rem 1.18rem;
@@ -173,8 +192,8 @@ h2 {
 }
 .work-list {
     position: fixed;
-    right: 5%;
-    top: 20%;
+    right: var(--frame-pad);
+    top: 16%;
     width: 40%;
     max-height: 70vh;
     overflow-y: auto;
@@ -191,8 +210,8 @@ h2 {
     z-index: 21;
     text-decoration: none;
     color: #444444;
-    margin-bottom: 2.2rem;
-    padding-right: 1.5rem;
+    margin-bottom: 1.76rem;
+    padding-right: 1.2rem;
     transition: color 0.2s;
 }
 
@@ -206,7 +225,7 @@ body.dark-mode .project-link p {
     margin-bottom: 0;
 }
 .project-link h2 {
-    font-size: 1.6rem;
+    font-size: 1.28rem;
     font-weight: 600;
     margin: 0 0 0.4rem 0;
     color: #444444;
@@ -214,16 +233,16 @@ body.dark-mode .project-link p {
 }
 
 #work .project-link h2 {
-    font-size: 2.2rem;
+    font-size: 1.76rem;
     font-weight: 400;
 }
 
 #work .project-link p {
-    font-size: 1.35rem;
+    font-size: 1.08rem;
 }
 
 .project-link p {
-    font-size: 1.18rem;
+    font-size: 0.94rem;
     font-weight: 200;
     margin: 0;
     color: #444444;
@@ -235,7 +254,7 @@ body.dark-mode .project-link p {
 }
 
 .contact-portrait {
-    width: 260px;
+    width: 208px;
     border-radius: 8px;
     display: block;
 }
@@ -264,7 +283,7 @@ body.dark-mode .project-link p {
 /* Theme toggle */
 .theme-toggle {
     position: fixed;
-    left: 5%;
+    left: var(--frame-pad);
     bottom: 5%;
     display: flex;
     flex-direction: column;
@@ -272,7 +291,7 @@ body.dark-mode .project-link p {
 }
 
 .theme-btn {
-    padding: 0.5rem 1rem;
+    padding: 0.4rem 0.8rem;
     background: transparent;
     border: 1px solid var(--text-grey);
     color: var(--text-grey);
@@ -280,7 +299,7 @@ body.dark-mode .project-link p {
     font-family: 'PP Neue Montreal', Helvetica, Arial, sans-serif;
     font-size: 0.9rem;
     font-weight: 400;
-    letter-spacing: 0.05rem;
+    letter-spacing: 0.04rem;
     transition: all 0.2s ease;
 }
 
@@ -306,7 +325,7 @@ body.mn-page .left-identity {
     position: fixed;
     top: 0;
     left: 0;
-    width: 40%;
+    width: 32%;
     z-index: 2;
     background: transparent;
 }
@@ -316,12 +335,12 @@ body.mn-page .right-content {
     position: relative;
     top: 0;
     left: 0;
-    width: 60%;
-    margin-left: 40%;
+    width: 68%;
+    margin-left: 32%;
 }
 
 body.mn-page .page-section {
-    padding: 5% 5% 5rem;
+    padding: var(--frame-pad);
     display: flex;
     justify-content: flex-end;
 }
@@ -329,8 +348,8 @@ body.mn-page .page-section {
 body.mn-page .page-section,
 body.mn-page .bio-box,
 body.mn-page .right-content {
-    padding-left: 5%;
-    padding-right: 5%;
+    padding-left: var(--frame-pad);
+    padding-right: var(--frame-pad);
 }
 
 body.mn-page .bio-box {
@@ -466,105 +485,4 @@ body.mn-page .mn-image-row.bag34-row img {
     object-position: top;
 }
 
-@media (max-width: 1024px) {
-    .global-header,
-    body.mn-page .global-header,
-    body.mn-page .left-identity {
-        position: relative;
-        width: 100%;
-        padding-left: 5%;
-        padding-top: 2.5rem;
-        z-index: 2;
-        background: transparent;
-    }
-
-    .main-nav,
-    nav,
-    .nav-links {
-        flex-wrap: wrap;
-    }
-
-    body.mn-page main,
-    body.mn-page .right-content {
-        position: relative;
-        width: 100%;
-        margin-left: 0;
-    }
-
-    .bio-box,
-    .contact-section,
-    .work-list,
-    body.mn-page .bio-box {
-        position: relative;
-        right: auto;
-        left: auto;
-        top: auto;
-        bottom: auto;
-        width: 100%;
-        max-width: 100%;
-        max-height: none;
-        text-align: left;
-        overflow: visible;
-        padding: 5%;
-    }
-
-    body.mn-page .page-section,
-    body.mn-page .bio-box,
-    body.mn-page .right-content {
-        padding-left: 5%;
-        padding-right: 5%;
-    }
-
-    .work-list {
-        margin-top: 1rem;
-    }
-
-    .project-link {
-        padding-right: 0;
-        margin-bottom: 1.5rem;
-    }
-
-    .project-link h2,
-    .project-link p {
-        text-align: left;
-    }
-
-    .contact-portrait {
-        width: 100%;
-        max-width: 340px;
-    }
-
-    .theme-toggle {
-        position: relative;
-        left: auto;
-        bottom: auto;
-        padding: 0 5% 5%;
-    }
-
-    body.mn-page .page-section {
-        display: block;
-        padding: 5%;
-    }
-
-    body.mn-page .bio-box {
-        padding: 0;
-        max-width: 100%;
-    }
-
-    body.mn-page .mn-image-row,
-    body.mn-page .geo-image-row,
-    body.mn-page .TMD-image-row,
-    body.mn-page .geo-image-row.art67-row {
-        grid-template-columns: 1fr;
-    }
-}
-
-@media (max-width: 767px) {
-    h1 {
-        font-size: 2.4rem;
-    }
-
-    .nav-links a {
-        font-size: 1rem;
-    }
-}
+ 
