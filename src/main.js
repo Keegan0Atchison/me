@@ -67,9 +67,9 @@ function initializeBoidOrientations() {
 }
 
 function getBoidRenderScale(screenWidth) {
-    if (screenWidth < 480) return 0.45;
-    if (screenWidth < 768) return 0.58;
-    if (screenWidth < 1024) return 0.67;
+    if (screenWidth < 480) return 0.24;
+    if (screenWidth < 768) return 0.34;
+    if (screenWidth < 1024) return 0.52;
     return 0.78;
 }
 
