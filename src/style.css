@@ -211,13 +211,13 @@ h2 {
 .contact-section {
     position: fixed;
     right: var(--frame-pad);
-    bottom: 5%;
-    width: min(38vw, 460px);
-    max-width: none;
-    max-height: 78vh;
-    overflow-y: auto;
+    top: var(--frame-pad);
+    bottom: auto;
+    max-width: 260px;
     padding: 1.18rem 1.18rem;
     background: none;
+    max-height: calc(100vh - (var(--frame-pad) * 2));
+    overflow-y: auto;
 }
 .work-list {
     position: fixed;
@@ -283,8 +283,7 @@ body.dark-mode .project-link p {
 }
 
 .contact-portrait {
-    width: 100%;
-    max-width: 320px;
+    width: 208px;
     border-radius: 8px;
     display: block;
 }
