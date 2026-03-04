@@ -5,7 +5,7 @@ export class BoidLogic {
         this.baseParams = {
             visualRange: 60,
             protectedRange: 18,
-            centeringFactor: 0.0008,
+            centeringFactor: 0.001,
             avoidFactor: 0.04,
             matchingFactor: 0.07,
             maxSpeed: 3.6,

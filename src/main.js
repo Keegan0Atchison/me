@@ -20,6 +20,8 @@ renderer.domElement.style.position = 'fixed';
 renderer.domElement.style.top = '0';
 renderer.domElement.style.left = '0';
 renderer.domElement.style.transform = 'none';
+renderer.domElement.style.width = '100vw';
+renderer.domElement.style.height = '100vh';
 renderer.domElement.style.zIndex = '-1';
 renderer.domElement.style.pointerEvents = 'none';
 document.body.appendChild(renderer.domElement);
