@@ -212,7 +212,10 @@ h2 {
     position: fixed;
     right: var(--frame-pad);
     bottom: 5%;
-    max-width: 260px;
+    width: min(38vw, 460px);
+    max-width: none;
+    max-height: 78vh;
+    overflow-y: auto;
     padding: 1.18rem 1.18rem;
     background: none;
 }
@@ -280,7 +283,8 @@ body.dark-mode .project-link p {
 }
 
 .contact-portrait {
-    width: 208px;
+    width: 100%;
+    max-width: 320px;
     border-radius: 8px;
     display: block;
 }
