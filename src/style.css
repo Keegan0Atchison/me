@@ -421,6 +421,7 @@ body.mn-page .mn-image-row.geo img,
 body.mn-page .mn-image-row.geo video {
     width: 100%;
     height: auto;
+    object-fit: cover;
     display: block;
 }
 
@@ -461,7 +462,12 @@ body.mn-page .mn-image-row.geo.art-video-row {
 body.mn-page .mn-image-row.geo.art-video-row video {
     width: 100%;
     height: auto;
+    object-fit: cover;
     display: block;
+}
+
+body.mn-page .right-content video {
+    object-fit: cover;
 }
 
 body.mn-page .geo-image-row.art67-row {

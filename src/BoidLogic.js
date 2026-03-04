@@ -7,10 +7,10 @@ export class BoidLogic {
             protectedRange: 18,
             centeringFactor: 0.001,
             avoidFactor: 0.04,
-            matchingFactor: 0.07,
+            matchingFactor: 0.09,
             maxSpeed: 3.2,
             minSpeed: 1.0,
-            turnFactor: 0.2,
+            turnFactor: 0.3,
             margin: 300,
             maxbias: 0.01,
             bias_increment: 0.00004
