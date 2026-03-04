@@ -73,11 +73,19 @@ function getBoidRenderScale(screenWidth) {
     return 0.78;
 }
 
+function getBoidOpacity(screenWidth) {
+    if (screenWidth < 480) return 0.46;
+    if (screenWidth < 768) return 0.56;
+    if (screenWidth < 1024) return 0.68;
+    return 0.82;
+}
+
 function handleResize() {
     width = window.innerWidth;
     height = window.innerHeight;
 
     boidRenderScale = getBoidRenderScale(width);
+    material.opacity = getBoidOpacity(width);
     boids.setResponsiveScale(width, height);
 
     renderer.setSize(width, height);
@@ -169,7 +177,6 @@ function updateProjectLinks(theme) {
 // Set initial theme from URL or local storage
 const params = new URLSearchParams(window.location.search);
 const initialTheme = params.get('theme') || localStorage.getItem('theme') || 'dark';
-let currentTheme = initialTheme;
 updateTheme(initialTheme);
 
 themeButtons.forEach(btn => {
@@ -180,7 +187,6 @@ themeButtons.forEach(btn => {
 });
 
 function updateTheme(theme) {
-    currentTheme = theme;
     localStorage.setItem('theme', theme);
     updateProjectLinks(theme);
     

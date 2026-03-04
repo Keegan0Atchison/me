@@ -28,11 +28,20 @@ export class BoidLogic {
     setResponsiveScale(width, height) {
         const minScreen = Math.min(width, height);
         const widthScale = Math.max(0.58, Math.min(1, width / 1280));
+        let mobileSpeedMultiplier = 1;
+
+        if (width < 480) {
+            mobileSpeedMultiplier = 0.58;
+        } else if (width < 768) {
+            mobileSpeedMultiplier = 0.68;
+        } else if (width < 1024) {
+            mobileSpeedMultiplier = 0.8;
+        }
 
         this.params.visualRange = this.baseParams.visualRange * widthScale;
         this.params.protectedRange = this.baseParams.protectedRange * widthScale;
-        this.params.maxSpeed = this.baseParams.maxSpeed * Math.max(0.85, widthScale);
-        this.params.minSpeed = this.baseParams.minSpeed * Math.max(0.85, widthScale);
+        this.params.maxSpeed = this.baseParams.maxSpeed * Math.max(0.85, widthScale) * mobileSpeedMultiplier;
+        this.params.minSpeed = this.baseParams.minSpeed * Math.max(0.85, widthScale) * mobileSpeedMultiplier;
         this.params.margin = Math.max(40, Math.min(this.baseParams.margin, minScreen * 0.2));
     }
 
