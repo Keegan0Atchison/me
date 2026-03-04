@@ -57,17 +57,25 @@ html {
 }
 
 body {
-    width: 100vw;
+    width: 100%;
+    min-width: 100%;
     margin: 0;
     position: relative;
-    overflow-x: hidden;
 }
 
-#scale-wrapper {
+#root-container {
     width: 1280px;
     margin: 0 auto;
     transform-origin: top left;
     position: relative;
+}
+
+@media (max-width: 1279px) {
+    #root-container {
+        transform: scale(calc(100vw / 1280));
+        margin-left: 0;
+        margin-right: 0;
+    }
 }
 
 p,
@@ -209,7 +217,7 @@ h2 {
 .work-list {
     position: fixed;
     right: var(--frame-pad);
-    top: 16%;
+    top: max(16%, var(--right-column-top, 0px));
     width: 40%;
     max-height: 70vh;
     overflow-y: auto;
@@ -353,6 +361,7 @@ body.mn-page .right-content {
     left: 0;
     width: 68%;
     margin-left: 32%;
+    margin-top: var(--right-column-offset, 0px);
 }
 
 body.mn-page .page-section {
@@ -376,6 +385,10 @@ body.mn-page .bio-box {
     padding: 0;
 }
 
+body.mn-page .bio-box p:empty {
+    display: none;
+}
+
 body.mn-page .mn-image-row {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -387,9 +400,7 @@ body.mn-page .mn-image-row {
 
 body.mn-page .mn-image-row img {
     width: 100%;
-    height: clamp(220px, 28vw, 360px);
-    object-fit: contain;
-    object-position: top;
+    height: auto;
     display: block;
 }
 
@@ -403,18 +414,14 @@ body.mn-page .mn-image-row.tapestry-feature-row {
 
 body.mn-page .mn-image-row.biomat-video-row video {
     width: 100%;
-    height: clamp(300px, 38vw, 600px);
-    object-fit: contain;
-    object-position: top;
+    height: auto;
     display: block;
 }
 
 body.mn-page .mn-image-row.geo img,
 body.mn-page .mn-image-row.geo video {
     width: 100%;
-    height: clamp(300px, 38vw, 640px);
-    object-fit: contain;
-    object-position: top;
+    height: auto;
     display: block;
 }
 
@@ -429,7 +436,6 @@ body.mn-page .geo-image-row {
 body.mn-page .geo-image-row img {
     width: 100%;
     height: auto;
-    object-fit: contain;
     display: block;
 }
 
@@ -443,9 +449,7 @@ body.mn-page .TMD-image-row {
 
 body.mn-page .TMD-image-row img {
     width: 100%;
-    height: clamp(240px, 30vw, 420px);
-    object-fit: contain;
-    object-position: top;
+    height: auto;
     display: block;
 }
 
@@ -462,9 +466,7 @@ body.mn-page .mn-image-row.geo.art-video-row video {
 }
 
 body.mn-page .mn-image-row.geo.art-video-row video.art-video-crop-vertical {
-    height: clamp(300px, 36vw, 500px);
-    object-fit: cover;
-    object-position: center;
+    height: auto;
 }
 
 body.mn-page .geo-image-row.art67-row {
@@ -474,15 +476,11 @@ body.mn-page .geo-image-row.art67-row {
 }
 
 body.mn-page .geo-image-row.art67-row img {
-    height: clamp(320px, 38vw, 560px);
-    object-fit: contain;
-    object-position: top;
+    height: auto;
 }
 
 body.mn-page .geo-image-row.art24-row img {
     height: auto;
-    object-fit: contain;
-    object-position: top;
 }
 
 body.mn-page .geo-image-row.art24-row {
@@ -490,15 +488,48 @@ body.mn-page .geo-image-row.art24-row {
 }
 
 body.mn-page .mn-image-row.bag12-row img {
-    height: clamp(320px, 40vw, 600px);
-    object-fit: contain;
-    object-position: top;
+    height: auto;
 }
 
 body.mn-page .mn-image-row.bag34-row img {
-    height: clamp(320px, 40vw, 600px);
-    object-fit: contain;
-    object-position: top;
+    height: auto;
+}
+
+@media (max-width: 1279px) {
+    body.mn-page #root-container {
+        width: 100%;
+        max-width: 100%;
+        transform: none;
+        margin: 0 auto;
+    }
+
+    body.mn-page .global-header,
+    body.mn-page .left-identity {
+        position: relative;
+        top: auto;
+        left: auto;
+        width: 100%;
+        padding: var(--frame-pad) var(--frame-pad) 0;
+    }
+
+    body.mn-page main,
+    body.mn-page .right-content {
+        width: 100%;
+        max-width: 100%;
+        margin-left: 0;
+        margin-top: 0;
+    }
+
+    body.mn-page .page-section {
+        padding: 1.25rem var(--frame-pad) var(--frame-pad);
+        justify-content: flex-start;
+    }
+
+    body.mn-page .bio-box {
+        width: 100%;
+        max-width: none;
+        margin: 0;
+    }
 }
 
  
