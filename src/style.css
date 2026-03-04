@@ -518,10 +518,12 @@ body.mn-page .mn-image-row.bag34-row img {
         max-width: 100%;
         margin-left: 0;
         margin-top: 0;
+        padding-left: 0;
+        padding-right: 0;
     }
 
     body.mn-page .page-section {
-        padding: 1.25rem var(--frame-pad) var(--frame-pad);
+        padding: 1.25rem 1rem 1rem;
         justify-content: flex-start;
     }
 
@@ -529,6 +531,33 @@ body.mn-page .mn-image-row.bag34-row img {
         width: 100%;
         max-width: none;
         margin: 0;
+        padding-left: 0;
+        padding-right: 0;
+    }
+}
+
+@media (max-width: 767px) {
+    :root {
+        --frame-pad: 1rem;
+    }
+
+    body:not(.mn-page) .global-header {
+        left: var(--frame-pad);
+        top: var(--frame-pad);
+        max-width: calc(100vw - (var(--frame-pad) * 2));
+    }
+
+    h1 {
+        font-size: clamp(2rem, 9vw, 2.8rem);
+        line-height: 1.05;
+        white-space: normal;
+        width: auto;
+        max-width: 100%;
+    }
+
+    .nav-links {
+        gap: 0.65rem;
+        flex-wrap: wrap;
     }
 }
 
