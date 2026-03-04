@@ -57,25 +57,17 @@ html {
 }
 
 body {
-    width: 100%;
-    min-width: 100%;
+    width: 100vw;
     margin: 0;
     position: relative;
+    overflow-x: hidden;
 }
 
-#root-container {
+#scale-wrapper {
     width: 1280px;
     margin: 0 auto;
     transform-origin: top left;
     position: relative;
-}
-
-@media (max-width: 1279px) {
-    #root-container {
-        transform: scale(calc(100vw / 1280));
-        margin-left: 0;
-        margin-right: 0;
-    }
 }
 
 p,
