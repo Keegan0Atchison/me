@@ -296,6 +296,14 @@ body.dark-mode .project-link p {
     margin: 0;
 }
 
+.contact-section .contact-info + .contact-info {
+    margin-top: 0.9rem;
+}
+
+.contact-info p + p {
+    margin-top: 0.45rem;
+}
+
 .contact-info a {
     color: var(--text-grey);
     text-decoration: none;
