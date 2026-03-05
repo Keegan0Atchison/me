@@ -653,10 +653,58 @@ body.mn-page .geo-image-row.art24-row {
         --frame-pad: 1rem;
     }
 
+    #root-container {
+        width: 100%;
+        max-width: 100%;
+        transform: none;
+        margin: 0 auto;
+    }
+
     body:not(.mn-page) .global-header {
-        left: var(--frame-pad);
-        top: var(--frame-pad);
-        max-width: calc(100vw - (var(--frame-pad) * 2));
+        position: relative;
+        left: auto;
+        top: auto;
+        width: 100%;
+        max-width: 100%;
+        padding: var(--frame-pad);
+        z-index: 2;
+    }
+
+    body:not(.mn-page) .work-list,
+    body:not(.mn-page) .contact-section,
+    body:not(.mn-page) .bio-box,
+    body:not(.mn-page) #simulation .bio-box {
+        position: relative;
+        left: auto;
+        right: auto;
+        top: auto;
+        bottom: auto;
+        width: 100%;
+        max-width: 100%;
+        max-height: none;
+        padding: 0;
+        margin-top: 1rem;
+        overflow: visible;
+    }
+
+    body:not(.mn-page) .work-list {
+        text-align: left;
+    }
+
+    body:not(.mn-page) .project-link,
+    body:not(.mn-page) .project-link h2,
+    body:not(.mn-page) .project-link p {
+        text-align: left;
+        padding-right: 0;
+    }
+
+    .theme-toggle {
+        position: relative;
+        left: auto;
+        bottom: auto;
+        margin: 1rem;
+        flex-direction: row;
+        z-index: 2;
     }
 
     h1 {
