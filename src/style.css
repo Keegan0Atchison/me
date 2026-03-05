@@ -4,6 +4,7 @@
     --frame-pad: 4rem;
     --project-left-col: 40%;
     --project-right-col: 60%;
+    --context-video-crop-height: 85vh;
 }
 
 @font-face {
@@ -47,7 +48,7 @@ body, html {
     width: 100%;
     height: 100%;
     overflow-x: hidden;
-    background: transparent;
+    background-color: #1a1a1a !important;
     color: var(--text-grey);
     line-height: 1.4;
 }
@@ -70,6 +71,7 @@ body {
     margin: 0 auto;
     transform-origin: top left;
     position: relative;
+    z-index: 1;
 }
 
 @media (max-width: 1279px) {
@@ -99,7 +101,7 @@ canvas {
     top: 0;
     left: 0;
     transform: none;
-    z-index: -1; /* Puts it behind everything */
+    z-index: 0; /* Puts it behind content but above page background */
     pointer-events: none; /* Allows clicks to pass through to buttons/links */
 }
 
@@ -159,8 +161,8 @@ nav {
 }
 
 h1 {
-    font-size: 4rem;
-    font-weight: 600;
+    font-size: 4.8rem;
+    font-weight: 400;
     margin: 0;
     letter-spacing: -0.02rem;
     line-height: 1;
@@ -185,7 +187,8 @@ h2 {
     z-index: 1;
 }
 
-#work {
+#work:not(.hidden) {
+    display: block;
     z-index: 20;
 }
 
@@ -208,12 +211,41 @@ h2 {
     margin-bottom: 0;
 }
 
+#simulation .bio-box a,
+#simulation .bio-box a:visited,
+#simulation .bio-box a:hover,
+#simulation .bio-box a:active,
+#simulation .bio-box a:focus {
+    color: var(--text-grey);
+    text-decoration: none;
+}
+
+#simulation .bio-box {
+    right: var(--frame-pad);
+    top: auto;
+    bottom: 5%;
+    width: min(360px, calc(100vw - (var(--frame-pad) * 2)));
+    max-width: none;
+    padding: 1.18rem 1.18rem;
+}
+
+.mjx-container {
+    max-width: 100% !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    color: var(--text-grey) !important;
+}
+
+.mjx-container[jax="SVG"] svg {
+    color: var(--text-grey) !important;
+}
+
 .contact-section {
     position: fixed;
     right: var(--frame-pad);
     top: var(--frame-pad);
     bottom: auto;
-    max-width: 260px;
+    width: min(360px, calc(100vw - (var(--frame-pad) * 2)));
     padding: 1.18rem 1.18rem;
     background: none;
     max-height: calc(100vh - (var(--frame-pad) * 2));
@@ -221,9 +253,10 @@ h2 {
 }
 .work-list {
     position: fixed;
+    left: calc(var(--project-left-col) + var(--frame-pad));
     right: var(--frame-pad);
     top: max(16%, var(--right-column-top, 0px));
-    width: 40%;
+    width: auto;
     max-height: 70vh;
     overflow-y: auto;
     text-align: right;
@@ -297,6 +330,11 @@ body.dark-mode .project-link p {
 
 .contact-info p {
     margin: 0;
+}
+
+#about .contact-info p {
+    text-align: justify;
+    text-justify: inter-word;
 }
 
 .contact-section .contact-info + .contact-info {
@@ -422,6 +460,18 @@ body.mn-page .mn-image-row.tapestry-feature-row {
     grid-template-columns: 1fr;
 }
 
+body.mn-page .mn-image-row.tapestry-mat-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+}
+
+body.mn-page .mn-image-row.tapestry-mat-row img {
+    height: clamp(220px, 30vw, 420px);
+    width: auto;
+    object-fit: contain;
+}
+
 body.mn-page .mn-image-row.biomat-video-row video {
     width: 100%;
     height: auto;
@@ -461,6 +511,22 @@ body.mn-page .TMD-image-row {
 body.mn-page .TMD-image-row img {
     width: 100%;
     height: auto;
+    display: block;
+}
+
+body.mn-page .TMD-image-row.context-video-row {
+    grid-template-columns: 1fr;
+    width: 100%;
+    max-width: 100%;
+    margin-top: 0;
+}
+
+body.mn-page .TMD-image-row.context-video-row .context-video {
+    width: 100%;
+    max-width: 100%;
+    height: clamp(460px, var(--context-video-crop-height), 1000px);
+    object-fit: cover;
+    object-position: center;
     display: block;
 }
 

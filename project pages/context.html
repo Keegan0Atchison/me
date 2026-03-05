@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<script>
+		document.documentElement.style.backgroundColor = '#1a1a1a';
+	</script>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta name="color-scheme" content="dark light" />
+	<meta name="description" content="The design and engineering portfolio of Keegan Atchison, specializing in biomedical and structural solutions." />
+	<meta property="og:title" content="Keegan Atchison Portfolio" />
+	<meta property="og:description" content="Designer + Engineer focusing on innovative structural and biomedical projects." />
+	<meta property="og:url" content="https://keegan0atchison.github.io/me/" />
+	<title>Keegan Atchison Portfolio</title>
+	<script>
+		window.MathJax = {
+			tex: {
+				inlineMath: [['$', '$'], ['\\(', '\\)']],
+				displayMath: [['$$', '$$'], ['\\[', '\\]']]
+			},
+			svg: {
+				fontCache: 'global'
+			}
+		};
+	</script>
+	<script src='https://polyfill.io/v3/polyfill.min.js?features=es6'></script>
+	<script id='MathJax-script' async src='https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js'></script>
+    <script src="/projectTheme.js"></script>
+	<link rel="stylesheet" href="/src/style.css">
+</head>
+<body class="mn-page">
+	<div id="root-container">
+	<header class="global-header left-identity">
+		<h1>Keegan Atchison</h1>
+		<nav class="main-nav">
+			<div class="nav-links">
+				<a href="../index.html#work">Work</a>
+				<a href="../index.html#about">About</a>
+				<a href="../index.html#simulation">Simulation</a>
+			</div>
+		</nav>
+	</header>
+
+<main class="right-content">
+    <section class="page-section" aria-label="Boids Algorithm Explanation">
+        <aside class="bio-box">
+			<div class="TMD-image-row context-video-row" aria-label="Algorithm visualization placeholders">
+				<video class="context-video" autoplay muted loop playsinline preload="auto" poster="../assets/3d6.jpg">
+					<source src="../assets/starling.mp4" type="video/mp4">
+				</video>
+                <p>Starling Murmuration. November 2024, Florence, Italy</p>
+                <p>I was in Florence for the day, on vacation from WASP 3D to see the city’s ceramists, and was transfixed by the motion above. I followed these small starlings to a square and stared for hours. They moved with such coordination, creating fleeting organic shapes only to disperse then fold back together. When the birds twist to expose their sides, their form appears; but, as they turn to point away or toward the camera, they seem to disappear. </p>
+                <p>I wanted to capture the beauty I observed. The following algorithm is derived from past work by Craig Reynolds and V. Hunter Adams.</p>
+            </div>
+
+            <hr>
+
+            <h3>Modeling Parameters</h3>
+            <div class="geo-image-row art24-row" aria-label="Microneedle project images">
+				<img src="../assets/boids1.png" alt="Microneedle project image MN3">
+				<img src="../assets/boids2.png" alt="Microneedle project image MN4">
+			</div>
+            <p>The algorithm considers individual boid (named after bird-oid object) movement to model the flock’s behavior. We will consider one boid (orange), its immediate neighbors (red), its further neighbors that it can see (blue). The other birds (purple) are outside the boid’s visual range.</p>
+            <p>The simulation balances social dynamics with environmental constraints using the following factors:</p>
+            <ul>
+                <li><strong>Centering:</strong> The centering factor pulls boids toward the flock's center of mass (pink). The boid's direction is corrected to align with the flock's movement.</li>
+                <li><strong>Avoidance:</strong> When the boid is too close to other birds (red), an avoidance range prevents collision.</li>
+                <li><strong>Visual Range:</strong> Boids can only see so far, the visual range sets the area a bird can perceive.</li>
+                <li><strong>Velocity Matching:</strong> The matching factor synchronizes a boid’s heading with its neighbors, creating unified flow.</li>
+                <li><strong>Scout Hierarchy:</strong> 10% of the flock is assigned with bias toward the left or right screen edges, simulating food or shelter.</li>
+            </ul>
+
+            <hr>
+
+            <h3>Mathematical Work</h3>
+
+            <p><strong>Distance Optimization</strong></p>
+            <p>
+                To avoid costly square root operations, neighborhood detection relies on squared Euclidean distance:
+                $$dist^2 = \Delta x^2 + \Delta y^2$$
+            </p>
+
+            
+
+            <p><strong>The Steering Sum</strong></p>
+            <p>
+                For every boid $i$, the velocity $\vec{v}$ is updated by summing the primary steering vectors:
+            </p>
+            <ul>
+                <li><strong>Cohesion:</strong> $\vec{v} += (\text{AvgPos}_{neighbors} - \text{Pos}_i) \times \text{centering factor}$</li>
+                <li><strong>Alignment:</strong> $\vec{v} += (\text{AvgVel}_{neighbors} - \vec{v}_i) \times \text{matching factor}$</li>
+                <li><strong>Separation:</strong> $\vec{v} += \sum (\text{Pos}_i - \text{Pos}_{neighbors}) \times \text{avoid factor}$</li>
+            </ul>
+
+            <p><strong>Scout Bias (Lerp)</strong></p>
+            <p>
+                Scouts utilize linear interpolation to steer horizontal velocity ($v_x$) toward a goal ($G$) based on their increasing <code>biasVal</code>:
+                $$v_{x\_new} = (1 - \text{bias}) \cdot v_x + \text{bias} \cdot G$$
+            </p>
+
+            <p><strong>Boundary Steering</strong></p>
+            <p>
+                A penalty method applies steering forces proportional to the depth of penetration into the screen margins:
+                $$\text{Force} = \text{turnFactor} \times \left( \frac{\text{depth}}{\text{margin}} \right) \times 5$$
+            </p>
+            <p>Note: I used html, javascript, & CSS; all code was developed by myself + AI collaboration.</p>
+
+            
+
+        </aside>
+    </section>
+</main>
+
+
+	<script type="module" src="/src/layoutGuard.js"></script>
+</body>
+</html>

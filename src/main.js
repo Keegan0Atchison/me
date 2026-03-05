@@ -22,7 +22,7 @@ renderer.domElement.style.left = '0';
 renderer.domElement.style.transform = 'none';
 renderer.domElement.style.width = '100vw';
 renderer.domElement.style.height = '100vh';
-renderer.domElement.style.zIndex = '-1';
+renderer.domElement.style.zIndex = '0';
 renderer.domElement.style.pointerEvents = 'none';
 document.body.appendChild(renderer.domElement);
 
@@ -131,7 +131,7 @@ window.onresize = handleResize;
 const navLinks = document.querySelectorAll('.nav-links a');
 
 function showSection(targetId) {
-    const targetSection = document.getElementById(targetId) || document.getElementById('home');
+    const targetSection = document.getElementById(targetId) || document.getElementById('work');
 
     document.querySelectorAll('.page-section').forEach(section => {
         section.classList.add('hidden');
@@ -151,7 +151,7 @@ navLinks.forEach(link => {
     });
 });
 
-const initialSection = window.location.hash ? window.location.hash.substring(1) : 'home';
+const initialSection = window.location.hash ? window.location.hash.substring(1) : 'work';
 showSection(initialSection);
 
 initializeBoidOrientations();
@@ -199,12 +199,16 @@ function updateTheme(theme) {
     if (theme === 'dark') {
         root.style.setProperty('--bg-white', '#1a1a1a');
         root.style.setProperty('--text-grey', '#cccccc');
+        root.style.setProperty('background-color', '#1a1a1a', 'important');
+        document.body.style.setProperty('background-color', '#1a1a1a', 'important');
         scene.background = new THREE.Color(0x1a1a1a);
         material.color.set(0xffffff);
         document.body.classList.add('dark-mode');
     } else {
         root.style.setProperty('--bg-white', '#ffffff');
         root.style.setProperty('--text-grey', '#555555');
+        root.style.setProperty('background-color', '#ffffff', 'important');
+        document.body.style.setProperty('background-color', '#ffffff', 'important');
         scene.background = new THREE.Color(0xffffff);
         material.color.set(0x000000);
         document.body.classList.remove('dark-mode');
