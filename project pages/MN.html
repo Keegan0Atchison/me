@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+	<script>
+		document.documentElement.style.backgroundColor = '#1a1a1a';
+	</script>
 	<meta charset="UTF-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<meta name="color-scheme" content="dark light" />
@@ -9,27 +12,9 @@
 	<meta property="og:description" content="Designer + Engineer focusing on innovative structural and biomedical projects." />
 	<meta property="og:url" content="https://keegan0atchison.github.io/me/" />
 	<title>Keegan Atchison Portfolio</title>
-	<script>
-		(() => {
-			const params = new URLSearchParams(window.location.search);
-			const theme = params.get('theme') || localStorage.getItem('theme') || 'dark';
-			const root = document.documentElement;
-
-			if (theme === 'dark') {
-				root.style.setProperty('--bg-white', '#1a1a1a');
-				root.style.setProperty('--text-grey', '#cccccc');
-				root.style.backgroundColor = '#1a1a1a';
-				root.classList.add('dark-mode');
-			} else {
-				root.style.setProperty('--bg-white', '#ffffff');
-				root.style.setProperty('--text-grey', '#555555');
-				root.style.backgroundColor = '#ffffff';
-				root.classList.remove('dark-mode');
-			}
-		})();
-	</script>
-  <script type="module" crossorigin src="/me/assets/layoutGuard-B_ZZ7TDc.js"></script>
-  <link rel="stylesheet" crossorigin href="/me/assets/layoutGuard-BMFrevDD.css">
+	<script src="/me/projectTheme.js"></script>
+  <script type="module" crossorigin src="/me/assets/layoutGuard-BSFM1Pu2.js"></script>
+  <link rel="stylesheet" crossorigin href="/me/assets/layoutGuard-CHdEG3DZ.css">
 </head>
 <body class="mn-page">
 	<div id="root-container">
@@ -37,9 +22,9 @@
 		<h1>Keegan Atchison</h1>
 		<nav class="main-nav">
 			<div class="nav-links">
-				<a href="../index.html#home">Home</a>
 				<a href="../index.html#work">Work</a>
 				<a href="../index.html#about">About</a>
+				<a href="../index.html#simulation">Simulation</a>
 			</div>
 		</nav>
 	</header>
@@ -66,41 +51,5 @@
 	</main>
 	</div>
 
-	<script>
-		(() => {
-			const root = document.documentElement;
-			const params = new URLSearchParams(window.location.search);
-			const theme = params.get('theme') || localStorage.getItem('theme') || 'dark';
-
-			function applyTheme(selectedTheme) {
-				if (selectedTheme === 'dark') {
-					root.style.setProperty('--bg-white', '#1a1a1a');
-					root.style.setProperty('--text-grey', '#cccccc');
-					document.body.classList.add('dark-mode');
-					document.body.style.backgroundColor = '#1a1a1a';
-				} else {
-					root.style.setProperty('--bg-white', '#ffffff');
-					root.style.setProperty('--text-grey', '#555555');
-					document.body.classList.remove('dark-mode');
-					document.body.style.backgroundColor = '#ffffff';
-				}
-
-				localStorage.setItem('theme', selectedTheme);
-
-				document.querySelectorAll('nav a').forEach(link => {
-					const href = link.getAttribute('href');
-					if (!href) {
-						return;
-					}
-
-					const url = new URL(href, window.location.href);
-					url.searchParams.set('theme', selectedTheme);
-					link.setAttribute('href', `${url.pathname}${url.search}${url.hash}`);
-				});
-			}
-
-			applyTheme(theme);
-		})();
-	</script>
 </body>
 </html>
